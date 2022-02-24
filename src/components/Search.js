@@ -47,12 +47,14 @@ const Search = () => {
         searchData.map((item, index) => {
           return (
             <RepositoryBox
+              url={item.html_url}
               key={index}
               width={100}
               title={item.name}
               description={item.description}
               avatar={item.owner.avatar_url}
               updated={item.updated_at}
+              button="등록"
               onClick={() =>
                 likeRepo({
                   name: item.name,

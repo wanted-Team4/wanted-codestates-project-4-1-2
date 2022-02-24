@@ -1,4 +1,7 @@
+import { useEffect, useState } from "react";
+
 import RepositoryBox from "./RepositoryBox";
+import axios from "axios";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -11,12 +14,35 @@ const Container = styled.div`
 `;
 
 const Issue = () => {
-  const data = JSON.parse(localStorage.getItem("likedData"));
-  console.log(data);
+  const likedData = JSON.parse(localStorage.getItem("likedData"));
+  const [issues, setIssues] = useState([]);
+
+  useEffect(() => {
+    likedData.map((value) => searchIssues(value.login, value.name));
+  }, []);
+
+  const searchIssues = async (login, name) => {
+    const url = `https://api.github.com/repos/${login}/${name}/issues`;
+    return axios
+      .get(url)
+      .then((res) => {
+        setIssues((body) => (body ? [...body, ...res.data] : res.data));
+      })
+      .catch((err) => alert(err));
+  };
 
   return (
     <Container>
-      <RepositoryBox width={100} />
+      {issues.map((value, index) => (
+        <RepositoryBox
+          width={100}
+          key={index}
+          title={value.title}
+          description={value.body}
+          // updated={value.repoName}
+          avatar={value.user.avatar_url}
+        />
+      ))}
     </Container>
   );
 };

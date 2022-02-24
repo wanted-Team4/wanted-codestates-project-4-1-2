@@ -1,6 +1,4 @@
-import { HeartFilled } from "@ant-design/icons";
 import styled from "styled-components";
-import useToggle from "../hooks/useToggle";
 
 const Box = styled.div`
   @media screen and (max-width: 1400px) {
@@ -27,6 +25,18 @@ const Box = styled.div`
     margin: 0 12px;
   }
 
+  button {
+    border: 0px;
+    background-color: #457cc7;
+    border-radius: 3px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    color: #fff;
+    width: 50px;
+    height: 40px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
   .box-title {
     font-weight: 900;
     font-size: large;
@@ -37,19 +47,9 @@ const Box = styled.div`
     color: #1c304d;
     opacity: 0.6;
   }
-  .box-heart {
+  .box-button {
     margin-left: auto;
     cursor: pointer;
-  }
-  .liked {
-    color: #fd9999;
-  }
-  .nliked {
-    color: #c0c0c0;
-    :hover {
-      color: #dcdcdc;
-      transition: 0.3s;
-    }
   }
 `;
 
@@ -61,36 +61,32 @@ const RepositoryBox = ({
   description = "Description",
   updated = "Updated",
   onClick,
+  button,
 }) => {
-  const [liked, toggleLike] = useToggle(false);
-
   return (
-    <a href={url} target="_blank" rel="noreferrer">
-      <Box width={width}>
-        <div className="box-avatar">
-          <img
-            style={{ borderRadius: 100 }}
-            width={50}
-            src={avatar}
-            alt="avatar"
-          />
-        </div>
-
+    <Box width={width}>
+      <div className="box-avatar">
+        <img
+          style={{ borderRadius: 100 }}
+          width={50}
+          src={avatar}
+          alt="avatar"
+        />
+      </div>
+      <a href={url} target="_blank" rel="noreferrer">
         <div>
           <div className="box-title">{title}</div>
           <div className="box-sub">{description}</div>
           <div className="box-sub">{updated}</div>
         </div>
+      </a>
 
-        <div className="box-heart" onClick={onClick}>
-          {liked ? (
-            <HeartFilled key="heart" className="liked" />
-          ) : (
-            <HeartFilled key="heart" className="nliked" onClick={toggleLike} />
-          )}
+      {button !== undefined ? (
+        <div className="box-button">
+          <button onClick={onClick}>{button}</button>
         </div>
-      </Box>
-    </a>
+      ) : null}
+    </Box>
   );
 };
 
