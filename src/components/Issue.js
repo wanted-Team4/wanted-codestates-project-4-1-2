@@ -1,7 +1,10 @@
+import RepositoryBox from "./RepositoryBox";
+
 const Issue = () => {
   return (
     <>
-      <div>Issue</div>
+      <div>Not</div>
+      <RepositoryBox />
     </>
   );
 };
