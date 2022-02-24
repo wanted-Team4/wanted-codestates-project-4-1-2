@@ -2,6 +2,7 @@ import Home from "./pages/home";
 import Navigation from "./components/Navigation";
 import { createGlobalStyle } from "styled-components";
 import React from "react";
+import { RecoilRoot } from 'recoil';
 
 const GlobalStyle = createGlobalStyle`
 
@@ -23,11 +24,11 @@ a{
 
 const App = () => {
   return (
-    <>
+    <RecoilRoot>
       <GlobalStyle />
       <Navigation />
       <Home />
-    </>
+    </RecoilRoot>
   );
 };
 
