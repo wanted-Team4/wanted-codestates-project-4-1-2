@@ -1,6 +1,13 @@
+import { HeartFilled } from "@ant-design/icons";
 import styled from "styled-components";
+import useToggle from "../hooks/useToggle";
 
 const Box = styled.div`
+  @media screen and (max-width: 1400px) {
+    .box-avatar {
+      display: none;
+    }
+  }
   display: flex;
   align-items: center;
   box-shadow: 0 3px 4px 1px rgb(32 33 36 / 20%);
@@ -8,6 +15,7 @@ const Box = styled.div`
   border-radius: 4px;
   padding: 15px;
   margin-bottom: 20px;
+  background: #fff;
 
   div {
     margin: 0 12px;
@@ -26,12 +34,14 @@ const Box = styled.div`
   .box-heart {
     margin-left: auto;
   }
-  .heart {
-    cursor: pointer;
+  .liked {
+    color: #fd9999;
   }
-  svg {
-    :focus {
-      fill: red;
+  .non-liked {
+    color: #c0c0c0;
+    :hover {
+      color: #dcdcdc;
+      transition: 0.3s;
     }
   }
 `;
@@ -44,9 +54,11 @@ const RepositoryBox = ({
   updated = "Updated",
   onClick,
 }) => {
+  const [liked, toggleLike] = useToggle(false);
+
   return (
     <Box width={width}>
-      <div>
+      <div className="box-avatar">
         <img
           style={{ borderRadius: 100 }}
           width={50}
@@ -61,19 +73,12 @@ const RepositoryBox = ({
         <div className="box-sub">{updated}</div>
       </div>
 
-      <div className="box-heart">
-        <svg
-          className="heart"
-          xmlns="http://www.w3.org/2000/svg"
-          height="24px"
-          viewBox="0 0 24 24"
-          width="24px"
-          fill="#dcdcdc"
-          onClick={onClick}
-        >
-          <path d="M0 0h24v24H0z" fill="none" />
-          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-        </svg>
+      <div className="box-heart" onClick={onClick}>
+        {liked ? (
+          <HeartFilled className="liked" key="heart" onClick={toggleLike} />
+        ) : (
+          <HeartFilled key="heart" className="non-liked" onClick={toggleLike} />
+        )}
       </div>
     </Box>
   );
