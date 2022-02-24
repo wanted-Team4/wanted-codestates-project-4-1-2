@@ -1,20 +1,36 @@
 import styled from "styled-components";
 import RepositoryBox from "./RepositoryBox";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useRecoilState } from "recoil";
+import { likedRepoState } from "../recoil/atoms";
+
 const Store = () => {
   const [repositoyBox, setRepositoyBox] = useState([
-    <RepositoryBox />,
-    <RepositoryBox />,
-    <RepositoryBox />,
-    <RepositoryBox />,
+    likedRepoState.length <= 1 ? likedRepoState : null,
   ]);
+  const [likedData, setLikedData] = useRecoilState(likedRepoState);
+
+  useEffect(() => {
+    setRepositoyBox([likedRepoState.length <= 1 ? likedRepoState : null]);
+  }, [likedRepoState]);
 
   let repositoyNum = null;
+  console.log(likedData);
 
-  repositoyBox.map((item, index) => {
+  const StoreMap = likedData.map((item, index) => {
     repositoyNum = index;
-    return <RepositoryBox key={index} />;
+    return (
+      <RepositoryBox
+        key={index}
+        width={`${23}vw`}
+        title={item.name}
+        description={item.description}
+        avatar={item.avatar_url}
+        updated={item.updated_at}
+      />
+    );
   });
+  console.log(repositoyNum);
   // alert 창
   if (repositoyNum >= 4) {
     alert("4개 이상 즐겨찾기 안됩니다 ");
@@ -23,7 +39,7 @@ const Store = () => {
     <>
       <StoreContainer>
         <StoreTitleBox>Public Repositoy</StoreTitleBox>
-        <StoreRepositoy>{repositoyBox}</StoreRepositoy>
+        <StoreRepositoy>{StoreMap}</StoreRepositoy>
       </StoreContainer>
     </>
   );
@@ -38,7 +54,8 @@ const StoreTitleBox = styled.div`
   font-weight: bold;
   width: 100%;
   text-align: center;
-  margin: 29px 0px;
+  font-size: 20px;
+  margin: 37px 0px 15px 0px;
 `;
 const StoreRepositoy = styled.div`
   // Repositoy 박스 담아주는 틀
