@@ -1,8 +1,9 @@
-import styled from "styled-components";
+import React, { useEffect, useState } from "react";
+
 import RepositoryBox from "./RepositoryBox";
-import React, { useState, useEffect } from "react";
-import { useRecoilState } from "recoil";
 import { likedRepoState } from "../recoil/atoms";
+import styled from "styled-components";
+import { useRecoilState } from "recoil";
 
 const Store = () => {
   const [repositoyBox, setRepositoyBox] = useState([
@@ -15,12 +16,13 @@ const Store = () => {
   }, [likedRepoState]);
 
   let repositoyNum = null;
-  console.log(likedData);
+  // console.log(likedData);
 
   const StoreMap = likedData.map((item, index) => {
     repositoyNum = index;
     return (
       <RepositoryBox
+        button="삭제"
         key={index}
         width={`${23}vw`}
         title={item.name}
@@ -30,7 +32,7 @@ const Store = () => {
       />
     );
   });
-  console.log(repositoyNum);
+  // console.log(repositoyNum);
   // alert 창
   if (repositoyNum >= 4) {
     alert("4개 이상 즐겨찾기 안됩니다 ");
