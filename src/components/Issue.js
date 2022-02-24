@@ -11,6 +11,9 @@ const Container = styled.div`
 `;
 
 const Issue = () => {
+  const data = JSON.parse(localStorage.getItem("likedData"));
+  console.log(data);
+
   return (
     <Container>
       <RepositoryBox width={100} />
