@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"; 
+import axios from "axios";
 import styled from "styled-components";
 import RepositoryBox from "./RepositoryBox";
 import { useRecoilState } from "recoil";
@@ -59,15 +60,15 @@ const SearchBox = ({ setData }) => {
   const [ input, setInput ] = useState("");
 
   //검색시 데이터 호출
-  const callData = () => {
-    const url = `https://api.github.com/search/repositories?q=${input}`;
+  const callData = async () => {
+    const url = `https://api.github.com/search/repositories?q=${input}&per_page=100`;
     
-    fetch(url)
-    .then((res) => res.json())
+    await axios
+    .get(url)
     .then((data) => {
-      setData(data.items);
+      setData(data.data.items);
       //테스트: 검색한 Repo 보기
-      //console.log(data.items);
+      console.log(data.data.items);
     });
   };
 
