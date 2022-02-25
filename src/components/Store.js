@@ -24,7 +24,7 @@ const Store = () => {
       <RepositoryBox
         button="삭제"
         key={index}
-        width={`${23}vw`}
+        width={100}
         title={item.name}
         description={item.description}
         avatar={item.avatar_url}
@@ -40,7 +40,7 @@ const Store = () => {
   return (
     <>
       <StoreContainer>
-        <StoreTitleBox>Public Repositoy</StoreTitleBox>
+        <StoreTitleBox>Public Repository</StoreTitleBox>
         <StoreRepositoy>{StoreMap}</StoreRepositoy>
       </StoreContainer>
     </>
@@ -49,7 +49,6 @@ const Store = () => {
 const StoreContainer = styled.div`
   // 스토어 틀
   width: 30%;
-  height: 100vw;
 `;
 const StoreTitleBox = styled.div`
   // Public Repositoy 이름 구간
@@ -62,8 +61,8 @@ const StoreTitleBox = styled.div`
 const StoreRepositoy = styled.div`
   // Repositoy 박스 담아주는 틀
   border-top: 5px solid #cbc3c3;
-  height: 100vw;
-  padding: 40px 0px 0px 50px;
+  padding: 30px 3vw;
+  box-sizing: border-box;
 `;
 
 export default Store;

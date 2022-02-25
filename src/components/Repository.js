@@ -5,7 +5,7 @@ import Search from "./Search";
 import "../styles/repo.css";
 
 const Section = styled.section`
-  width: 100%;
+  width: 70%;
 `;
 const TabContainer = styled.ul`
   display: flex;

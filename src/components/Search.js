@@ -11,7 +11,7 @@ import Pagination from "./Pagination";
 const Container = styled.div`
   width: 100%;
   height: 100%;
-  min-height: calc(100vh - 151px);
+  min-height: calc(100vh - 134px);
   background: #eee;
   padding: 5vw;
   margin-top: 4px;
