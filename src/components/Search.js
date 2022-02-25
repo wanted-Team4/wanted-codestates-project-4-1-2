@@ -89,6 +89,14 @@ const Search = () => {
         ) : (
           <Loader />
         ))}
+
+      <Pagination
+        total={searchData.length}
+        limit={limit}
+        page={page}
+        setPage={setPage}
+      />
+
     </Container>
   );
 };
