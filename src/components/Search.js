@@ -6,6 +6,7 @@ import SearchBox from "./SearchBox";
 import { likedRepoState } from "../recoil/atoms";
 import styled from "styled-components";
 import { useRecoilState } from "recoil";
+import Pagination from "./Pagination";
 
 const Container = styled.div`
   width: 100%;
@@ -21,6 +22,10 @@ const Search = () => {
   const [searchData, setSearchData] = useState([]);
   const [likedData, setLikedData] = useRecoilState(likedRepoState);
   const [isLoaded, setIsLoaded] = useState(null);
+
+  const [limit, setLimit] = useState(5);
+  const [page, setPage] = useState(1);
+  const offset = (page - 1) * limit;
 
   useEffect(() => {
     localStorage.setItem("likedData", JSON.stringify(likedData));
@@ -50,7 +55,7 @@ const Search = () => {
       <SearchBox setData={setSearchData} setIsLoaded={setIsLoaded} />
       {isLoaded !== null &&
         (isLoaded ? (
-          searchData.map((item, index) => {
+          searchData.slice(offset, offset + limit).map((item, index) => {
             return (
               <RepositoryBox
                 url={item.html_url}
@@ -76,6 +81,12 @@ const Search = () => {
         ) : (
           <Loader />
         ))}
+      <Pagination
+        total={searchData.length}
+        limit={limit}
+        page={page}
+        setPage={setPage}
+      />
     </Container>
   );
 };
