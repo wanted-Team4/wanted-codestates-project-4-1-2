@@ -42,37 +42,43 @@ const Button = styled.button`
 const Pagination = ({ total, limit, page, setPage }) => {
   const numPages = Math.ceil(total / limit);
   const [number, setNumber] = useState(1);
-  const add = () => {
+
+  const next = () => {
+    if (page === number + 4 && page !== numPages) {
+      if (page + 3 >= numPages) setNumber((prev) => prev + 1);
+      else setNumber((prev) => prev + 3);
+    }
     setPage(page + 1);
-    setNumber(number + 1);
   };
 
-  const minus = () => {
-    if (number > 1) {
-      setPage(page - 1);
-      setNumber(number - 1);
+  const prev = () => {
+    if (page === number && page !== 1) {
+      if (page - 3 <= 1) setNumber((prev) => prev - 1);
+      else setNumber((prev) => prev - 3);
     }
+    setPage(page - 1);
   };
+
   return (
     <>
       <Nav>
-        <Button onClick={() => minus()} disabled={page === numPages}>
+        <Button onClick={prev} disabled={page === 1}>
           &lt;
         </Button>
-        {Array(numPages)
+        {Array(Math.ceil(total / limit) < 5 ? Math.ceil(total / limit) : 5)
           .fill()
-          .slice(0, 10)
+          .slice(0, 5)
           .map((x, i) => (
             <Button
-              key={i + 1}
-              aria-current={page === i + 1 ? "page" : null}
-              onClick={() => setPage(i + 1)}
+              key={i + number}
+              aria-current={page === i + number ? "page" : null}
+              onClick={() => setPage(i + number)}
             >
               {i + number}
             </Button>
           ))}
         <p>...</p>
-        <Button disabled={page === numPages} onClick={() => add()}>
+        <Button onClick={next} disabled={page === numPages}>
           &gt;
         </Button>
       </Nav>
