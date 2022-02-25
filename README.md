@@ -1,10 +1,63 @@
-## payhere
+## 💳 wanted-codestates-project-4-1
 
-작성 중 입니다.
+Github API를 이용하여 등록한 Repository의 issue를 모아 보는 뷰어입니다.
 
-<img width="449" alt="스크린샷 2022-02-24 오후 4 21 16" src="https://user-images.githubusercontent.com/48751435/155477188-2439683b-a9ff-440f-a744-1dd0ee0a54b6.png">
+팀원들 모두가 조금이라도 더 공부해보고 싶다는 열정으로 같은 팀에서 다시 두 팀으로 나누어 같은 프로젝트를 진행하였습니다.
 
-## 📌 Code Convention
+### 💳 &nbsp;[과제 확인하러 가기](https://competent-mcnulty-34dc65.netlify.app/)
+
+### <br/>
+
+###
+
+## 🧥 View
+
+### <br/>
+
+###
+
+## 💳 Implement
+
+### Stack
+
+`Javascript` `React` `Recoil` `Styled-Components`
+
+### Features
+
+- [x] Repository 검색창 구현
+- [x] 검색 시 Loading UI 구현
+- [x] Repository 등록 구현
+- [x] Repository 등록을 최대 4개로 제한
+- [x] 중복된 Repository 등록 제한
+- [x] 등록한 Repository issue를 모아 볼 수 있는 뷰어 구현
+- [x] 등록한 Repository 삭제 구현
+- [x] Pagenation 구현
+
+### <br/>
+
+###
+
+## 💳 Directory
+
+```
+├── public/
+├── src/
+│   ├── components/                   - page components
+│   ├── hooks/                        - custom hook(toggle, input)
+│   ├── recoil/                       - state 저장 및 관리
+│   └── pages/                        - main page
+│
+├── App.js                            - 분리한 page components를 randering
+├── index.js                          - entry point
+├── README.md                         - 리드미(프리뷰, 배포링크, 코드컨벤션)
+└── package.json                      - 사용 package 목록
+```
+
+### <br/>
+
+###
+
+## 💳 Code Convention
 
 ### Getting Started
 
