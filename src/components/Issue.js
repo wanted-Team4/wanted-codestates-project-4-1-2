@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import RepositoryBox from "./RepositoryBox";
 import axios from "axios";
 import styled from "styled-components";
+import Pagination from "./Pagination";
 
 const Container = styled.div`
   width: 100%;
@@ -16,6 +17,10 @@ const Container = styled.div`
 const Issue = () => {
   const likedData = JSON.parse(localStorage.getItem("likedData"));
   const [issues, setIssues] = useState([]);
+
+  const [limit, setLimit] = useState(5);
+  const [page, setPage] = useState(1);
+  const offset = (page - 1) * limit;
 
   useEffect(() => {
     likedData.map((value) => searchIssues(value.login, value.name));
@@ -34,7 +39,7 @@ const Issue = () => {
 
   return (
     <Container>
-      {issues.map((value, index) => (
+      {issues.slice(offset, offset + limit).map((value, index) => (
         <RepositoryBox
           url={value.html_url}
           width={100}
@@ -44,6 +49,12 @@ const Issue = () => {
           avatar={value.user.avatar_url}
         />
       ))}
+      <Pagination
+        total={issues.length}
+        limit={limit}
+        page={page}
+        setPage={setPage}
+      />
     </Container>
   );
 };
