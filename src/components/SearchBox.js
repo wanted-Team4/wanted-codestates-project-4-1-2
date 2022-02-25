@@ -38,14 +38,18 @@ const SearchBtn = styled.button`
   cursor: pointer;
 `;
 
-const SearchBox = ({ setData }) => {
+const SearchBox = ({ setData, setIsLoaded }) => {
   const [input, setInput] = useState("");
 
   const callData = async () => {
+    setIsLoaded(false);
+
     const url = `https://api.github.com/search/repositories?q=${input}&per_page=100`;
     await axios.get(url).then((data) => {
       setData(data.data.items);
     });
+
+    setIsLoaded(true);
   };
 
   //검색시 데이터 찾기
