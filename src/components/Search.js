@@ -23,8 +23,11 @@ const Search = () => {
   const [likedData, setLikedData] = useRecoilState(likedRepoState);
   const [isLoaded, setIsLoaded] = useState(null);
 
+  // 페이지별 담는 글 갯수
   const [limit, setLimit] = useState(5);
   const [page, setPage] = useState(1);
+
+  // 총 몇개의 페이지가 필요한지 계산
   const offset = (page - 1) * limit;
 
   useEffect(() => {
@@ -41,7 +44,6 @@ const Search = () => {
         (repoName) =>
           repoName.name === repo.name && repoName.login === repo.login
       );
-
       if (exist) {
         alert("이미 등록한 Repository입니다.");
       } else {
@@ -81,12 +83,7 @@ const Search = () => {
         ) : (
           <Loader />
         ))}
-      <Pagination
-        total={searchData.length}
-        limit={limit}
-        page={page}
-        setPage={setPage}
-      />
+      <Pagination total={searchData.length} limit={limit} page={page} />
     </Container>
   );
 };

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styled from "styled-components";
 
 const Nav = styled.nav`
@@ -40,6 +41,11 @@ const Button = styled.button`
 
 const Pagination = ({ total, limit, page, setPage }) => {
   const numPages = Math.ceil(total / limit);
+  const [number, setNumber] = useState(1);
+  const add = () => {
+    setNumber(number + 1);
+  };
+
   return (
     <>
       <Nav>
@@ -48,16 +54,22 @@ const Pagination = ({ total, limit, page, setPage }) => {
         </Button>
         {Array(numPages)
           .fill()
-          .map((v, i) => (
+          .slice(0, 5)
+          .map((x, i) => (
             <Button
               key={i + 1}
-              onClick={() => setPage(i + 1)}
               aria-current={page === i + 1 ? "page" : null}
+              onClick={() => setPage(i + 1)}
             >
-              {i + 1}
+              {i + number}
             </Button>
           ))}
-        <Button onClick={() => setPage(page + 1)} disabled={page === numPages}>
+        <p>...</p>
+        <Button
+          disabled={page === numPages}
+          aria-disabled={numPages + 1 === numPages}
+          onClick={() => add(number + 1)}
+        >
           &gt;
         </Button>
       </Nav>
