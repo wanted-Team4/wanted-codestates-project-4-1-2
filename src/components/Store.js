@@ -18,25 +18,29 @@ const Store = () => {
         description={item.description}
         avatar={item.avatar}
         updated={item.updated}
+        onClick={()=> remove(item.name, item.login)}
       />
     );
   });
 
-  const remove = (e) => {
-    console.log(
-      e.target.parentNode.previousSibling.previousSibling.firstElementChild.src
-    );
-    let targets =
-      e.target.parentNode.previousSibling.previousSibling.firstElementChild.src;
+  const remove = (name, login) => {
+    const storageData = JSON.parse(localStorage.getItem("likedData"));
 
-    setLikedData(likedData.filter((item) => item.avatar !== targets));
+    const deletedArr = storageData.filter((item)=> item.name !== name || item.login !== login);
+
+    setLikedData(deletedArr);
+
   };
+
+  useEffect(()=> {
+    localStorage.setItem('likedData', JSON.stringify(likedData));
+  }, [likedData]);
 
   return (
     <>
       <StoreContainer>
-        <StoreTitleBox>Public Repositoy</StoreTitleBox>
-        <StoreRepositoy onClick={remove}>{StoreMap}</StoreRepositoy>
+        <StoreTitleBox>Public Repository</StoreTitleBox>
+        <StoreRepositoy>{StoreMap}</StoreRepositoy>
       </StoreContainer>
     </>
   );
