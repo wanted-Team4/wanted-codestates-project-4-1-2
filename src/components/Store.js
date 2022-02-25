@@ -13,7 +13,7 @@ const Store = () => {
       <RepositoryBox
         button="삭제"
         key={index}
-        width={`${365}px`}
+        width={`auto`}
         title={item.name}
         description={item.description}
         avatar={item.avatar}
