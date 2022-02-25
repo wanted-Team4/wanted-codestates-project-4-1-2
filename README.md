@@ -2,15 +2,17 @@
 
 Github API를 이용하여 등록한 Repository의 issue를 모아 보는 뷰어입니다.
 
-팀원들 모두가 조금이라도 더 공부해보고 싶다는 열정으로 같은 팀에서 다시 두 팀으로 나누어 같은 프로젝트를 진행하였습니다.
+팀원들 모두가 조금이라도 더 많은 부분을 공부해보고 싶다는 의지가 있어 팀 내 에서 다시 두 팀으로 나누어 같은 프로젝트를 진행하였습니다.
 
-### 💳 &nbsp;[과제 확인하러 가기](https://competent-mcnulty-34dc65.netlify.app/)
+### 💳 &nbsp;[과제 확인하러 가기](https://clever-kepler-a84405.netlify.app/)
 
 ### <br/>
 
 ###
 
-## 🧥 View
+## 💳 View
+
+![payhere_view](https://user-images.githubusercontent.com/48751435/155750461-4504769d-3697-461b-b12f-7db291477cbf.gif)
 
 ### <br/>
 
