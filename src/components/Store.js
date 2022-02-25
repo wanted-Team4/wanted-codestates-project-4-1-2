@@ -6,42 +6,37 @@ import styled from "styled-components";
 import { useRecoilState } from "recoil";
 
 const Store = () => {
-  const [repositoyBox, setRepositoyBox] = useState([
-    likedRepoState.length <= 1 ? likedRepoState : null,
-  ]);
   const [likedData, setLikedData] = useRecoilState(likedRepoState);
 
-  useEffect(() => {
-    setRepositoyBox([likedRepoState.length <= 1 ? likedRepoState : null]);
-  }, [likedRepoState]);
-
-  let repositoyNum = null;
-  // console.log(likedData);
-
   const StoreMap = likedData.map((item, index) => {
-    repositoyNum = index;
     return (
       <RepositoryBox
         button="삭제"
         key={index}
-        width={100}
+        width={`${365}px`}
         title={item.name}
         description={item.description}
-        avatar={item.avatar_url}
-        updated={item.updated_at}
+        avatar={item.avatar}
+        updated={item.updated}
       />
     );
   });
-  // console.log(repositoyNum);
-  // alert 창
-  if (repositoyNum >= 4) {
-    alert("4개 이상 즐겨찾기 안됩니다 ");
-  }
+
+  const remove = (e) => {
+    console.log(
+      e.target.parentNode.previousSibling.previousSibling.firstElementChild.src
+    );
+    let targets =
+      e.target.parentNode.previousSibling.previousSibling.firstElementChild.src;
+
+    setLikedData(likedData.filter((item) => item.avatar !== targets));
+  };
+
   return (
     <>
       <StoreContainer>
-        <StoreTitleBox>Public Repository</StoreTitleBox>
-        <StoreRepositoy>{StoreMap}</StoreRepositoy>
+        <StoreTitleBox>Public Repositoy</StoreTitleBox>
+        <StoreRepositoy onClick={remove}>{StoreMap}</StoreRepositoy>
       </StoreContainer>
     </>
   );
