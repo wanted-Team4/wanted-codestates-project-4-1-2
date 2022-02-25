@@ -5,7 +5,8 @@ const Nav = styled.nav`
   align-items: center;
   width: 100%;
   height: 50px;
-  margin-left: 20px;
+  padding-left: 20px;
+  box-sizing: border-box;
   font-size: 30px;
   font-weight: bold;
 `;
