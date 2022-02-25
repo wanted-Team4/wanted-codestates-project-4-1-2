@@ -29,6 +29,11 @@ const Search = () => {
 
   // 총 몇개의 페이지가 필요한지 계산
   const offset = (page - 1) * limit;
+  
+  useEffect(()=> {
+    const storageData = JSON.parse(localStorage.getItem("likedData"));
+    if(storageData) setLikedData(storageData);
+  }, []);
 
   useEffect(() => {
     localStorage.setItem("likedData", JSON.stringify(likedData));
@@ -57,33 +62,33 @@ const Search = () => {
       <SearchBox setData={setSearchData} setIsLoaded={setIsLoaded} />
       {isLoaded !== null &&
         (isLoaded ? (
-          searchData.slice(offset, offset + limit).map((item, index) => {
-            return (
-              <RepositoryBox
-                url={item.html_url}
-                key={index}
-                width={100}
-                title={item.name}
-                description={item.description}
-                avatar={item.owner.avatar_url}
-                updated={item.updated_at}
-                button="등록"
-                onClick={() =>
-                  likeRepo({
-                    name: item.name,
-                    login: item.owner.login,
-                    description: item.description,
-                    updated: item.updated_at,
-                    avatar: item.owner.avatar_url,
-                  })
-                }
-              />
-            );
-          })
+          <>
+            {searchData.slice(offset, offset + limit).map((item, index) => 
+                <RepositoryBox
+                  url={item.html_url}
+                  key={index}
+                  width={100}
+                  title={item.name}
+                  description={item.description}
+                  avatar={item.owner.avatar_url}
+                  updated={item.updated_at}
+                  button="등록"
+                  onClick={() =>
+                    likeRepo({
+                      name: item.name,
+                      login: item.owner.login,
+                      description: item.description,
+                      updated: item.updated_at,
+                      avatar: item.owner.avatar_url,
+                    })
+                  }
+                />
+            )}
+            <Pagination total={searchData.length} limit={limit} page={page} />
+          </>
         ) : (
           <Loader />
         ))}
-      <Pagination total={searchData.length} limit={limit} page={page} />
     </Container>
   );
 };
