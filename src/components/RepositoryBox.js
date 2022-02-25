@@ -58,8 +58,8 @@ const RepositoryBox = ({
   url,
   avatar = "https://avatars.githubusercontent.com/u/15073430?v=4",
   title = "Title",
-  description = "Description",
-  updated = "Updated",
+  description,
+  updated,
   onClick,
   button,
 }) => {
@@ -76,8 +76,12 @@ const RepositoryBox = ({
       <a href={url} target="_blank" rel="noreferrer">
         <div>
           <div className="box-title">{title}</div>
-          <div className="box-sub">{description}</div>
-          <div className="box-sub">{updated}</div>
+          {description !== undefined ? (
+            <div className="box-sub">{description}</div>
+          ) : null}
+          {updated !== undefined ? (
+            <div className="box-sub">{updated}</div>
+          ) : null}
         </div>
       </a>
 

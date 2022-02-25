@@ -26,7 +26,8 @@ const Issue = () => {
     return axios
       .get(url)
       .then((res) => {
-        setIssues((body) => (body ? [...body, ...res.data] : res.data));
+        setIssues((body) => (body ? [...body, ...res.data] : [res.data]));
+        // const data = Object.assign({}, issues, likedData);
       })
       .catch((err) => alert(err));
   };
@@ -35,11 +36,11 @@ const Issue = () => {
     <Container>
       {issues.map((value, index) => (
         <RepositoryBox
+          url={value.html_url}
           width={100}
           key={index}
           title={value.title}
-          description={value.body}
-          // updated={value.repoName}
+          updated={value.name}
           avatar={value.user.avatar_url}
         />
       ))}
