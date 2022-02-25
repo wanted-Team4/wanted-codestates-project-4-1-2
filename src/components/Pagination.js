@@ -43,13 +43,22 @@ const Pagination = ({ total, limit, page, setPage }) => {
   const numPages = Math.ceil(total / limit);
   const [number, setNumber] = useState(1);
   const add = () => {
-    setNumber(number + 1);
+    if (page === number) {
+      setPage(page + 1);
+      setNumber(number + 0);
+    }
   };
 
+  const minus = () => {
+    if (number > 1) {
+      setPage(page - 1);
+      setNumber(number - 1);
+    }
+  };
   return (
     <>
       <Nav>
-        <Button onClick={() => setPage(page - 1)} disabled={page === 1}>
+        <Button onClick={() => minus()} disabled={page === 1}>
           &lt;
         </Button>
         {Array(numPages)
@@ -65,11 +74,7 @@ const Pagination = ({ total, limit, page, setPage }) => {
             </Button>
           ))}
         <p>...</p>
-        <Button
-          disabled={page === numPages}
-          aria-disabled={numPages + 1 === numPages}
-          onClick={() => add(number + 1)}
-        >
+        <Button disabled={page === numPages} onClick={() => add()}>
           &gt;
         </Button>
       </Nav>
