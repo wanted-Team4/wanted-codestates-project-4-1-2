@@ -67,7 +67,7 @@ const Search = () => {
                 <RepositoryBox
                   url={item.html_url}
                   key={index}
-                  width={100}
+                  width={`auto`}
                   title={item.name}
                   description={item.description}
                   avatar={item.owner.avatar_url}
@@ -84,18 +84,17 @@ const Search = () => {
                   }
                 />
             )}
-            <Pagination total={searchData.length} limit={limit} page={page} />
+            <Pagination
+              total={searchData.length}
+              limit={limit}
+              page={page}
+              setPage={setPage}
+            />
           </>
         ) : (
           <Loader />
         ))}
 
-      <Pagination
-        total={searchData.length}
-        limit={limit}
-        page={page}
-        setPage={setPage}
-      />
 
     </Container>
   );
