@@ -43,10 +43,8 @@ const Pagination = ({ total, limit, page, setPage }) => {
   const numPages = Math.ceil(total / limit);
   const [number, setNumber] = useState(1);
   const add = () => {
-    if (page === number) {
-      setPage(page + 1);
-      setNumber(number + 0);
-    }
+    setPage(page + 1);
+    setNumber(number + 1);
   };
 
   const minus = () => {
@@ -58,12 +56,12 @@ const Pagination = ({ total, limit, page, setPage }) => {
   return (
     <>
       <Nav>
-        <Button onClick={() => minus()} disabled={page === 1}>
+        <Button onClick={() => minus()} disabled={page === numPages}>
           &lt;
         </Button>
         {Array(numPages)
           .fill()
-          .slice(0, 5)
+          .slice(0, 10)
           .map((x, i) => (
             <Button
               key={i + 1}
