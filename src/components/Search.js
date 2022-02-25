@@ -19,8 +19,9 @@ const Container = styled.div`
 `;
 
 const Search = () => {
+  const storageData = JSON.parse(localStorage.getItem("likedData"));
   const [searchData, setSearchData] = useState([]);
-  const [likedData, setLikedData] = useRecoilState(likedRepoState);
+  const [likedData, setLikedData] = useState(storageData ? storageData : []);
   const [isLoaded, setIsLoaded] = useState(null);
 
   // 페이지별 담는 글 갯수
@@ -29,11 +30,6 @@ const Search = () => {
 
   // 총 몇개의 페이지가 필요한지 계산
   const offset = (page - 1) * limit;
-  
-  useEffect(()=> {
-    const storageData = JSON.parse(localStorage.getItem("likedData"));
-    if(storageData) setLikedData(storageData);
-  }, []);
 
   useEffect(() => {
     localStorage.setItem("likedData", JSON.stringify(likedData));
